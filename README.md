@@ -1,38 +1,73 @@
-### Generating TV Scripts
+# TV Script Generator
 
-This project uses Recurrent Neural Networks(RNN) and Long - Short Term Networks (LSTM) to generated TV Scripts.
-This is based on Pytorch Library.
-I built a Recurrent Neural Network (i.e. RNN) that can be used to generate new TV scripts for the Seinfeld show.
-My dataset consists of a subset of the Seinfeld dataset of scripts from 9 seasons.
+## Project Overview
 
-The RNN is built on Pytorch, written in Python 3 and is presented via Jupyter Notebook. 
-The RNN was trained on a cloud-based GPU.
+In this project, I generated my own [Seinfeld](https://en.wikipedia.org/wiki/Seinfeld) TV scripts using RNNs. I used part of the [Seinfled dataset](https://www.kaggle.com/thec03u5/seinfeld-chronicles#scripts.csv) of scripts from 9 seasons. The Neural Network I generated a new, "fake" TV script, based on patterns it reconginzes in this training data.
 
-Note: the generated TV script output content is still fairly nonsensical.
+## Project Instruction
 
-The following are some of the steps I took to build this RNN:
+### Instruction
 
-##Preprocessing
+1. Clone the repository and navigate to the downloaded folder.
+	```
+		git clone https://github.com/PradeepVenna292/Udacity-Deep-Learning-Nanodegree-Project3-Generating-TV-Scripts.git
+		cd TV-Script-Generator
+	```
+2. Open the `dlnd_tv_script_generation.ipynb` file. Of course, you can find HTML version of the file.
+	```
+		jupyter notebook dlnd_tv_script_generation.ipynb
+	```
+3. Read and follow the instructions! This repository already includes the dataset in a form of txt flie in `data` folder.
 
-Created a Lookup Table with two dictionaries (Word to ID and ID to Word) used for word embeddings
-Split scripts into word arrays and implemented a function for tokenizing punctuation. The punctuation becomes like another word in the word array. This makes it easier for the RNN to predict the next word.
+## Project Information
 
-##Build the Neural Network
+### Contents
 
-Implemented the following functions as core components for building the RNN
-get_inputs: creates TF Placeholders for inputs, targets, and learning rate in the Neural Network
-get_init_cell: build RNN cell and initialize; Stacked multiple LSTM layers.
-get_embed: Applied word embedding to input_data, Return the embedded sequence.
-build_rnn: Build the RNN using nn.rnn()
-build_nn: Build the NN by calling functions get_embed, build_rnn. Apply FC layer with linear activation. Return logits, final_state.
-get_batches: Create batches of input and targets as a Numpy array with shape (num_batches, 2, batch_size, seq_length)
-Training the network
+- Get the Data
+- Explore the Data
+- Implement Pre-processing Functions
+	- Lookup Table
+	- Tokenize Punctuation
+- Pre-process all the data and save it
+- Check Access to GPU
+- Input
+	- Batching
+	- Test your dataloader
+	- Sizes
+	- Values
+- Build the Neural Network
+	- Define forward and backpropagation
+- Neural Network Training
+	- Train Loop
+	- Hyperparameters
+	- Train 
+- Generate TV Script
+	- Generate text
+	- Generate a new script
 
-##Hyperparameters
+### Model
+| Layer | Input Dimension | Output Dimension |
+| ----- | --------------- | ---------- |
+|Embedding|Vocab Size| 200 |
+|LSTM|200|256|
+|FC|256|Vocab Size|
 
-epochs, batch size, rnn size, sequence length, learning rate
+### Hyperparameters
+|Data Parameter|Value|
+|--------------|------|
+|sequence_length| 10|
+|batch_size| 128 |
 
-Training: Trained the neural network on the preprocessed data. 
+|Training Parameter|Value|
+|------------------|-----|
+|num_epochs|20|
+|learning_rate|0.001|
+|embedding_dim|200|
+|hidden_dim|256|
+|n_layers(Number of RNN Layers)|2|
 
+### Libraries
 
+The list below represents main libraries and its objects for the project.
+- [PyTorch](https://pytorch.org) (LSTM)
 
